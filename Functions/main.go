@@ -63,7 +63,7 @@ func ReverseArr(r []int) {
 	}
 }
 
-func ReverseString() {
+func ReverseString(s string) string {
 
 }
 
