@@ -22,7 +22,7 @@ func Min(x, y int) int {
 	return y
 }
 
-func AbsValue(x, y int) int {
+func Distance (x, y int) int {
 	difference := x - y
 	if difference < 0 {
 		return -difference
