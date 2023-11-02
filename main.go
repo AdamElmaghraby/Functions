@@ -131,4 +131,18 @@ func hasElement(arr []int, element int) bool {
     return false
 }
 
-func de
+func deduplicate(arr []int) []string{
+    
+    m := make(map[string]bool)
+    
+    var result []string
+
+    for _, value := range arr {
+        m[value] = true
+    }
+
+    for x, _ := range m{
+        result = append(result, x)
+    }
+    return result
+}
