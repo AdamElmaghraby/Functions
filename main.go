@@ -108,7 +108,7 @@ func GenEven(min, max int) {
 }
 
 
-func arrEqual(a, b []iint) bool {
+func arrEqual(a, b []int) bool {
     if len(a) != len(b) {
         return false
     }
@@ -120,3 +120,15 @@ func arrEqual(a, b []iint) bool {
     }
     return true
 }
+
+
+func hasElement(arr []int, element int) bool {
+    for _, i := range arr{
+        if i == element{
+            return true
+        }
+    }
+    return false
+}
+
+func de
