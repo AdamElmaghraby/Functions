@@ -1,84 +1,122 @@
 package functions
 
 import (
-	"math/rand"
+    "math/rand"
 )
 
 func Add(x, y int) int {
-	return x + y
+    return x + y
 }
 
 func Max(x, y int) int {
-	if x > y {
-		return x
-	}
-	return y
+    if x > y {
+        return x
+    }
+    return y
 }
 
 func Min(x, y int) int {
-	if x < y {
-		return x
-	}
-	return y
+    if x < y {
+        return x
+    }
+    return y
 }
 
 func AbsValue(x int) int {
-	if x < 0 {
-		return -x
-	}
-	return x
+    if x < 0 {
+        return -x
+    }
+    return x
 }
 
 func Distance(x, y int) int {
-	difference := x - y
-	if difference < 0 {
-		return -difference
-	}
-	return difference
+    difference := x - y
+    if difference < 0 {
+        return -difference
+    }
+    return difference
 }
 
 func RandNumber(n, max int) []int {
-	var numbers []int
+    var numbers []int
 
-	for i := 0; i < n; i++ {
-		numbers = append(numbers, rand.Intn(max))
+    for i := 0; i < n; i++ {
+        numbers = append(numbers, rand.Intn(max))
 
-	}
-	return numbers
+    }
+    return numbers
 }
 
 func Shuffle(s []int) []int {
 
-	for i := 0; i < len(s); i++ {
-		x, y := rand.Intn(len(s)), rand.Intn(len(s))
+    for i := 0; i < len(s); i++ {
+        x, y := rand.Intn(len(s)), rand.Intn(len(s))
 
-		s[x], s[y] = s[y], s[x]
-	}
-	return s
+        s[x], s[y] = s[y], s[x]
+    }
+    return s
 }
 
 func ReverseArr(r []int) {
-	for i, j := 0, len(r)-1; i < j; i, j = i+1, j-1 {
-		r[i], r[j] = r[j], r[i]
-	}
+    for i, j := 0, len(r)-1; i < j; i, j = i+1, j-1 {
+        r[i], r[j] = r[j], r[i]
+    }
 }
 
 func ReverseString(s string) string {
-
+    rvs := []rune(s)
+    for i,j := 0, len(rvs)-1; i<j; i,j = i++, j-- {
+        rvs[i], rvs[j] = rvs[j], rvs[i]
+    }
+    return string(rvs) 
 }
 
-func IsEven() {
-
+func IsEven(x int) bool {
+    return x%2 == 0
 }
 
-func IsOdd() {
-
+func IsOdd(x int) bool {
+    return x%2 != 0
 }
 
-func GenOdd(a, b int) {
+func GenOdd(min, max int) []int {
+    var list []int
 
+    if min%2 == 0{
+        min ++
+    }
+
+    for i := min; i<= max; i+=2 {
+        list = append(list, i)
+    }
+
+    return list
 }
 
-func GenEven(a, b int) {
+func GenEven(min, max int) {
+    var list []int
 
+    if min%2 != 0{
+        min ++
+    }
+
+    for i := min; i<= max; i+=2 {
+        list = append(list, i)
+    }
+
+    return list
+}
+
+
+func arrEqual(a, b []iint) bool {
+    if len(a) != len(b) {
+        return false
+    }
+
+    for i = range a {
+        if a[i] != b[i] {
+            return false
+        }
+    }
+    return true
 }
