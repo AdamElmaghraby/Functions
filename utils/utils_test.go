@@ -151,6 +151,110 @@ func TestMin(t *testing.T) {
 	}
 }
 
+func TestAbsValue(t *testing.T) {
+	type AbsTest struct {
+		Expect int
+		Input1 int
+	}
+
+	table := []AbsTest{
+		{
+			Input1: 1,
+			Expect: 1,
+		},
+		{
+			Input1: -2,
+			Expect: 2,
+		},
+		{
+			Input1: 0,
+			Expect: 0,
+		},
+		{
+			Input1: 100000000,
+			Expect: 100000000,
+		},
+		{
+			Input1: -100000000,
+			Expect: 100000000,
+		},
+	}
+
+	for _, v := range table {
+		got := AbsValue(v.Input1)
+
+		if got != v.Expect {
+			t.Errorf("for inputs [%d] expected %d; got %d", v.Input1, v.Expect, got)
+		}
+	}
+}
+
+func TestDistance(t *testing.T) {
+	type DisTest struct {
+		Expect int
+		Input1 int
+		Input2 int
+	}
+
+	table := []DisTest{
+		{
+			Input1: 0,
+			Input2: 0,
+			Expect: 0,
+		},
+		{
+			Input1: -2,
+			Input2: -2,
+			Expect: 0,
+		},
+		{
+			Input1: 1,
+			Input2: 1,
+			Expect: 0,
+		},
+		{
+			Input1: 2,
+			Input2: 3,
+			Expect: 1,
+		},
+		{
+			Input1: 1,
+			Input2: 5,
+			Expect: 4,
+		},
+		{
+			Input1: -2,
+			Input2: 1,
+			Expect: 3,
+		},
+	}
+
+	for _, v := range table {
+		got := Distance(v.Input1, v.Input2)
+
+		if got != v.Expect {
+			t.Errorf("for inputs [%d, %d] expected %d; got %d", v.Input1, v.Input2, v.Expect, got)
+		}
+	}
+}
+
+func TestRandNumber(t *testing.T) {
+	n := 6
+	max := 1000
+
+	nums := RandNumber(n, max)
+
+	if len(nums) != n {
+		t.Errorf("length of result is %d instead of %d", len(nums), n)
+	}
+
+	for _, v := range nums {
+		if v < 0 || v > max {
+			t.Errorf("result is outside valid range; got %d", v)
+		}
+	}
+}
+
 /*func TestAdd(t *testing.T) {
 	t.Run("TwoPositive", func(t *testing.T) {
 		if Add(1, 1) != 2 {
