@@ -255,33 +255,19 @@ func TestRandNumber(t *testing.T) {
 	}
 }
 
-/*func TestAdd(t *testing.T) {
-	t.Run("TwoPositive", func(t *testing.T) {
-		if Add(1, 1) != 2 {
-			t.Error("Adding 1 + 1 should equal 2")
+func TestShuffle(t *testing.T) {
+	input := []int{1, 2, 3, 4, 5}
+
+	output := Shuffle(input)
+
+	if len(input) != len(output) {
+		t.Errorf("Length of input and output slices do not match")
+	}
+
+	for _, element := range input {
+		if !hasElement(output, element) {
+			t.Errorf("Element %d missing in the output slice", element)
 		}
-	})
+	}
 
-    t.Run("TwoNegative", func(t *testing.T) {
-		if Add(-1, -1) != -2 {
-			t.Error("Adding -1 + -1 should equal -2")
-		}
-	})
-
-    t.Run("OneOne", func(t *testing.T) {
-		if Add(1, -1) != 0 {
-			t.Error("Adding 1 + -1 should equal 0")
-		}
-	})
-
-    t.Run("OneOne", func(t *testing.T) {
-		if Add(1, -1) != 0 {
-			t.Error("Adding 1 + -1 should equal 0")
-		}
-	})
-
-
-
-
-
-}*/
+}
