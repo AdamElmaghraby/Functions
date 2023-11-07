@@ -53,10 +53,12 @@ func Shuffle(s []int) []int {
 	return s
 }
 
-func ReverseArr(r []int) {
-	for i, j := 0, len(r)-1; i < j; i, j = i+1, j-1 {
-		r[i], r[j] = r[j], r[i]
+func ReverseArr(r []int) []int {
+	reversed := make([]int, len(r))
+	for i, j := 0, len(r)-1; i <= j; i, j = i+1, j-1 {
+		reversed[i], reversed[j] = r[j], r[i]
 	}
+	return reversed
 }
 
 func ReverseString(s string) string {

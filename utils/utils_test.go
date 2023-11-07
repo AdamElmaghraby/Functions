@@ -271,3 +271,41 @@ func TestShuffle(t *testing.T) {
 	}
 
 }
+
+func TestReverseArr(t *testing.T) {
+	type RvsArrTest struct {
+		Expect []int
+		Input1 []int
+	}
+
+	table := []RvsArrTest{
+		{
+			Input1: []int{1, 2, 3, 4, 5},
+			Expect: []int{5, 4, 3, 2, 1},
+		},
+		{
+			Input1: []int{5, 5, 5, 5, 5},
+			Expect: []int{5, 5, 5, 5, 5},
+		},
+		{
+			Input1: []int{-1, -2, -3, -4, -5},
+			Expect: []int{-5, -4, -3, -2, -1},
+		},
+		{
+			Input1: []int{1, 0, 3, 4, 5},
+			Expect: []int{5, 4, 3, 0, 1},
+		},
+		{
+			Input1: []int{1, 0, -3, 4, 5},
+			Expect: []int{5, 4, -3, 0, 1},
+		},
+	}
+
+	for _, test := range table {
+		reversedSlice := ReverseArr(test.Input1)
+
+		if !arrEqual(reversedSlice, test.Expect) {
+			t.Errorf("For input %v, expected %v; got %v", test.Input1, test.Expect, reversedSlice)
+		}
+	}
+}
