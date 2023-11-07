@@ -301,11 +301,95 @@ func TestReverseArr(t *testing.T) {
 		},
 	}
 
-	for _, test := range table {
-		reversedSlice := ReverseArr(test.Input1)
+	for _, v := range table {
+		got := ReverseArr(v.Input1)
 
-		if !arrEqual(reversedSlice, test.Expect) {
-			t.Errorf("For input %v, expected %v; got %v", test.Input1, test.Expect, reversedSlice)
+		if !arrEqual(got, v.Expect) {
+			t.Errorf("For input %v, expected %v; got %v", v.Input1, v.Expect, got)
+		}
+	}
+}
+
+func TestIsEven(t *testing.T) {
+	testCases := []struct {
+		input    int
+		expected bool
+	}{
+		{2, true},
+		{0, true},
+		{1, false},
+		{3, false},
+		{-2, true},
+		{-1, false},
+	}
+
+	for _, tc := range testCases {
+		result := IsEven(tc.input)
+		if result != tc.expected {
+			t.Errorf("For input %d, expected IsEven to be %v, but got %v", tc.input, tc.expected, result)
+		}
+	}
+}
+
+func TestIsOdd(t *testing.T) {
+	testCases := []struct {
+		input    int
+		expected bool
+	}{
+		{2, false},
+		{0, false},
+		{1, true},
+		{3, true},
+		{-2, false},
+		{-1, true},
+	}
+
+	for _, tc := range testCases {
+		result := IsOdd(tc.input)
+		if result != tc.expected {
+			t.Errorf("For input %d, expected IsOdd to be %v, but got %v", tc.input, tc.expected, result)
+		}
+	}
+}
+
+func TestGenOdd(t *testing.T) {
+	type GenOddTest struct {
+		min      int
+		max      int
+		expected []int
+	}
+	table := []GenOddTest{
+		{1, 10, []int{1, 3, 5, 7, 9}},
+		{2, 10, []int{3, 5, 7, 9}},
+		{10, 20, []int{11, 13, 15, 17, 19}},
+		{0, 1, []int{1}},
+	}
+
+	for _, v := range table {
+		result := GenOdd(v.min, v.max)
+		if !arrEqual(result, v.expected) {
+			t.Errorf("For range [%d, %d], expected %v, but got %v", v.min, v.max, v.expected, result)
+		}
+	}
+}
+
+func TestGenEven(t *testing.T) {
+	type GenEvenTest struct {
+		min      int
+		max      int
+		expected []int
+	}
+	table := []GenEvenTest{
+		{1, 10, []int{2, 4, 6, 8, 10}},
+		{2, 10, []int{2, 4, 6, 8, 10}},
+		{10, 20, []int{10, 12, 14, 16, 18, 20}},
+		{0, 1, []int{}},
+	}
+
+	for _, v := range table {
+		result := GenEven(v.min, v.max)
+		if !arrEqual(result, v.expected) {
+			t.Errorf("For range [%d, %d], expected %v, but got %v", v.min, v.max, v.expected, result)
 		}
 	}
 }

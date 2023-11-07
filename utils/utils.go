@@ -93,7 +93,9 @@ func GenOdd(min, max int) []int {
 func GenEven(min, max int) []int {
 	var list []int
 
-	if min%2 != 0 {
+	if min == 0 {
+		min = 2
+	} else if min%2 != 0 {
 		min++
 	}
 
@@ -109,7 +111,7 @@ func arrEqual(a, b []int) bool {
 		return false
 	}
 
-	for _, i := range a {
+	for i, _ := range a {
 		if a[i] != b[i] {
 			return false
 		}
