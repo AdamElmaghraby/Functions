@@ -106,7 +106,7 @@ func GenEven(min, max int) []int {
 	return list
 }
 
-func arrEqual(a, b []int) bool {
+func ArrEqual(a, b []int) bool {
 	if len(a) != len(b) {
 		return false
 	}
@@ -119,7 +119,20 @@ func arrEqual(a, b []int) bool {
 	return true
 }
 
-func hasElement(arr []int, element int) bool {
+func ArrEqualStr(a, b []string) bool {
+	if len(a) != len(b) {
+		return false
+	}
+
+	for i, _ := range a {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+	return true
+}
+
+func HasElement(arr []int, element int) bool {
 	for _, i := range arr {
 		if i == element {
 			return true
@@ -128,18 +141,18 @@ func hasElement(arr []int, element int) bool {
 	return false
 }
 
-func deduplicate(arr []string) []string {
+func Deduplicate(arr []string) []string {
 
 	m := make(map[string]bool)
 
 	var result []string
 
 	for _, value := range arr {
-		m[value] = true
+		if !m[value] {
+			m[value] = true
+			result = append(result, value)
+		}
 	}
 
-	for x, _ := range m {
-		result = append(result, x)
-	}
 	return result
 }

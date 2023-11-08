@@ -265,7 +265,7 @@ func TestShuffle(t *testing.T) {
 	}
 
 	for _, element := range input {
-		if !hasElement(output, element) {
+		if !HasElement(output, element) {
 			t.Errorf("Element %d missing in the output slice", element)
 		}
 	}
@@ -304,7 +304,7 @@ func TestReverseArr(t *testing.T) {
 	for _, v := range table {
 		got := ReverseArr(v.Input1)
 
-		if !arrEqual(got, v.Expect) {
+		if !ArrEqual(got, v.Expect) {
 			t.Errorf("For input %v, expected %v; got %v", v.Input1, v.Expect, got)
 		}
 	}
@@ -367,7 +367,7 @@ func TestGenOdd(t *testing.T) {
 
 	for _, v := range table {
 		result := GenOdd(v.min, v.max)
-		if !arrEqual(result, v.expected) {
+		if !ArrEqual(result, v.expected) {
 			t.Errorf("For range [%d, %d], expected %v, but got %v", v.min, v.max, v.expected, result)
 		}
 	}
@@ -388,8 +388,73 @@ func TestGenEven(t *testing.T) {
 
 	for _, v := range table {
 		result := GenEven(v.min, v.max)
-		if !arrEqual(result, v.expected) {
+		if !ArrEqual(result, v.expected) {
 			t.Errorf("For range [%d, %d], expected %v, but got %v", v.min, v.max, v.expected, result)
+		}
+	}
+}
+
+func TestArrEqual(t *testing.T) {
+	type ArrEqualTest struct {
+		input1   []int
+		input2   []int
+		expected bool
+	}
+	table := []ArrEqualTest{
+		{[]int{2, 4, 6, 8, 10}, []int{2, 4, 6, 8, 10}, true},
+		{[]int{1, 2, 3}, []int{1, 2, 3, 4}, false},
+		{[]int{1, 2, 3}, []int{3, 2, 1}, false},
+		{[]int{}, []int{}, true},
+		{[]int{1, 2, 3}, []int{1, 2, 3}, true},
+	}
+
+	for _, v := range table {
+		result := ArrEqual(v.input1, v.input2)
+		if result != v.expected {
+			t.Errorf("For slices [%d, %d], expected %v, but got %v", v.input1, v.input2, v.expected, result)
+		}
+	}
+}
+
+func TestHasElement(t *testing.T) {
+	type HasElementTest struct {
+		input1   []int
+		input2   int
+		expected bool
+	}
+	table := []HasElementTest{
+		{[]int{2, 4, 6, 8, 10}, 2, true},
+		{[]int{1, 3, 5, 7, 9}, 4, false},
+		{[]int{1, 2, 3, 4, 5}, 6, false},
+		{[]int{}, 42, false},
+	}
+
+	for _, v := range table {
+		result := HasElement(v.input1, v.input2)
+		if result != v.expected {
+			t.Errorf("For slice %v and element %d, expected %v, but got %v", v.input1, v.input2, v.expected, result)
+		}
+	}
+}
+
+func TestDeduplicate(t *testing.T) {
+	type DeduplicateTest struct {
+		input1   []string
+		expected []string
+	}
+	table := []DeduplicateTest{
+		{[]string{"2", "4", "6", "8", "10"}, []string{"2", "4", "6", "8", "10"}},
+		{[]string{"2", "2", "4", "4", "6", "6"}, []string{"2", "4", "6"}},
+		{[]string{"a", "b", "c", "a", "b"}, []string{"a", "b", "c"}},
+		{[]string{}, []string{}},
+		{[]string{"apple", "banana", "cherry", "date", "fig", "apple"}, []string{"apple", "banana", "cherry", "date", "fig"}},
+		{[]string{"x", "x", "y", "x", "z", "y", "z", "y"}, []string{"x", "y", "z"}},
+	}
+
+	for _, v := range table {
+		result := Deduplicate(v.input1)
+		if !ArrEqualStr(result, v.expected) {
+			t.Errorf("For slice %v, expected %v, but got %v", v.input1, v.expected, result)
 		}
 	}
 }
