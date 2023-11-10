@@ -8,7 +8,6 @@ import (
 )
 
 func main() {
-
 	fmt.Println("Welcome to the Utils Test Application!\nAre you ready to get started? (Y/N)")
 
 	var response string
@@ -26,34 +25,23 @@ func main() {
 	var FavNum int
 	fmt.Scanln(&FavNum)
 
-	fmt.Println("Wierd choice but okay.. \n What about your 2nd favorite number?")
+	fmt.Println("Weird choice but okay.. \n What about your 2nd favorite number?")
 	var FavNum2 int
 	fmt.Scanln(&FavNum2)
 
-	var StringAnswer string
+	var StringAnswer int
 
 	fmt.Println("Moving on..")
 
 	for {
-		fmt.Println("Moving on..\nAnswer this problem (enter numbers separated by spaces): What are the first 5 digits of pi?")
-		// Read the entire line as a string
+		fmt.Println("Answer this problem (enter the first 5 digits of pi as a single integer):")
 		fmt.Scanln(&StringAnswer)
 
-		// Split the input into individual numbers
-		numbers := strings.Fields(StringAnswer)
-
-		// Check if the numbers match
-		if len(numbers) == 5 &&
-			numbers[0] == "3" &&
-			numbers[1] == "1" &&
-			numbers[2] == "4" &&
-			numbers[3] == "1" &&
-			numbers[4] == "5" {
+		if StringAnswer != 31415 {
+			fmt.Println("Wrong. Try again.")
+		} else {
 			fmt.Println("Correct! Moving on.")
 			break
-		} else {
-			fmt.Println("Wrong. Try again.")
-			fmt.Scanln()
 		}
 	}
 
@@ -61,7 +49,7 @@ func main() {
 	var name string
 	fmt.Scanln(&name)
 
-	numbers := strings.Fields(StringAnswer)
+	numbers := strings.Fields(fmt.Sprint(StringAnswer))
 
 	var SliceAnswer []int
 	for _, numStr := range numbers {
