@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"strconv"
 
 	"github.com/AdamElmaghraby/Functions/pkg/utils"
 )
@@ -22,22 +22,22 @@ func main() {
 	}
 
 	fmt.Println("Great! Let's get started. \n What's your favorite number?")
-	var FavNum int
-	fmt.Scanln(&FavNum)
+	var favNum int
+	fmt.Scanln(&favNum)
 
 	fmt.Println("Weird choice but okay.. \n What about your 2nd favorite number?")
-	var FavNum2 int
-	fmt.Scanln(&FavNum2)
+	var favNum2 int
+	fmt.Scanln(&favNum2)
 
-	var StringAnswer int
+	var stringAnswer int
 
 	fmt.Println("Moving on..")
 
 	for {
 		fmt.Println("Answer this problem (enter the first 5 digits of pi as a single integer):")
-		fmt.Scanln(&StringAnswer)
+		fmt.Scanln(&stringAnswer)
 
-		if StringAnswer != 31415 {
+		if stringAnswer != 31415 {
 			fmt.Println("Wrong. Try again.")
 		} else {
 			fmt.Println("Correct! Moving on.")
@@ -49,49 +49,47 @@ func main() {
 	var name string
 	fmt.Scanln(&name)
 
-	numbers := strings.Fields(fmt.Sprint(StringAnswer))
+	var sliceAnswer []int
 
-	var SliceAnswer []int
-	for _, numStr := range numbers {
-		var num int
-		_, err := fmt.Sscan(numStr, &num)
+	for _, numStr := range strconv.Itoa(stringAnswer) {
+		i, err := strconv.Atoi(string(numStr))
+
 		if err != nil {
-			fmt.Println("Error converting input to numbers:", err)
-			return
+			continue
 		}
-		SliceAnswer = append(SliceAnswer, num)
+		sliceAnswer = append(sliceAnswer, i)
 	}
 
 	fmt.Println("Based off your results, I want to tell you these fun facts!")
 
-	randomNumbers := utils.RandNumber(FavNum, FavNum2)
+	randomNumbers := utils.RandNumber(favNum, favNum2)
 	fmt.Println("Random numbers using your two favorite numbers:", randomNumbers)
-	shuffledNumbers := utils.Shuffle(SliceAnswer)
+	shuffledNumbers := utils.Shuffle(sliceAnswer)
 	fmt.Println("Shuffled Random Numbers using pi:", shuffledNumbers)
 
-	reversedIntSlice := utils.ReverseArr(SliceAnswer)
+	reversedIntSlice := utils.ReverseArr(sliceAnswer)
 	fmt.Println("Reversed Digits of pi:", reversedIntSlice)
 
 	reversedString := utils.ReverseString(name)
 	fmt.Println("Your name reversed:", reversedString)
 
-	if utils.IsEven(FavNum) {
-		fmt.Printf("%d is even.\n", FavNum)
+	if utils.IsEven(favNum) {
+		fmt.Printf("%d is even.\n", favNum)
 	} else {
-		fmt.Printf("%d is odd.\n", FavNum)
+		fmt.Printf("%d is odd.\n", favNum)
 	}
 
-	min := FavNum
-	max := FavNum2
-	evenNumbers := utils.GenEven(FavNum, FavNum2)
-	oddNumbers := utils.GenOdd(FavNum, FavNum2)
+	min := favNum
+	max := favNum2
+	evenNumbers := utils.GenEven(favNum, favNum2)
+	oddNumbers := utils.GenOdd(favNum, favNum2)
 	fmt.Printf("Even numbers between %d and %d: %v\n", min, max, evenNumbers)
 	fmt.Printf("Odd numbers between %d and %d: %v\n", min, max, oddNumbers)
 
-	if utils.HasElement(SliceAnswer, FavNum) {
-		fmt.Printf("your Favorite number, %d , does exist in first 5 digits of pi.\n", FavNum)
+	if utils.HasElement(sliceAnswer, favNum) {
+		fmt.Printf("your Favorite number, %d , does exist in first 5 digits of pi.\n", favNum)
 	} else {
-		fmt.Printf("your Favorite number, %d , does not exist in first 5 digits of pi.\n", FavNum)
+		fmt.Printf("your Favorite number, %d , does not exist in first 5 digits of pi.\n", favNum)
 	}
 
 }
