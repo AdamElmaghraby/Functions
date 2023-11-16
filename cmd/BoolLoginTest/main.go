@@ -31,4 +31,7 @@ func main() {
 	} else {
 		fmt.Println("It's sunny today.")
 	}
+
+	
+
 }

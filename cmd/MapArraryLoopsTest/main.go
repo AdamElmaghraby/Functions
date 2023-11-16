@@ -44,7 +44,11 @@ func main() {
 		fmt.Printf("Key: %d, Value: %s\n", key, value)
 	}
 
-	valueString := intStringMap[2]
+	valueString, ok := intStringMap[2]
+
+	if ok {
+		fmt.Println("Value Does Exist")
+	}
 
 	fmt.Println("\n")
 
