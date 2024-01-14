@@ -45,14 +45,39 @@ func evaluateRPN(expr string) (float64, error) {
 			stack = append(stack, num)
 		} else {
 			if len(stack) < 2 {
-				return 0, fmt.Errorf("not enough operands for operator %s")
+				return 0, fmt.Errorf("not enough operands for operator %s", token)
 			}
 			operand2 := stack[len(stack)-1]
 			operand1 := stack[len(stack)-2]
 			stack = stack[:len(stack)-2]
 
 			var result float64
-			swithc token {}
+			switch token {
+			case "+":
+				result = operand1 + operand2
+			case "-":
+				result = operand1 - operand2
+			case "*":
+				result = operand1 * operand2
+			case "/":
+				if operand2 == 0 {
+					return 0, fmt.Errorf("Division by 0")
+				}
+				result = operand1 / operand2
+			default:
+				return 0, fmt.Errorf("unknown operator: %s", token)
+			}
+
+			stack = append(stack, result)
 		}
 	}
+	if len(stack) != 1 {
+		return 0, fmt.Errorf("Invalid Expression")
+	}
+	return stack[0], nil
+}
+
+func isNumber(s string) bool {
+	_, err := strconv.ParseFloat(s, 64)
+	return err == nil
 }
