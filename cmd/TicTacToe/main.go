@@ -25,13 +25,16 @@ func initializedBoard() Board {
 }
 
 func printBoard(board Board) {
-	fmt.Println("-------------")
-	for x := 0; 0 < 3; x++ {
-		fmt.Print("| ")
+	fmt.Println("  0 1 2")
+	fmt.Println(" -------")
+	for x := 0; x < 3; x++ {
+		fmt.Print(x)
+		fmt.Print("|")
 		for y := 0; y < 3; y++ {
-			fmt.Print(board[x][y])
+			fmt.Printf(" %s", board[x][y])
 		}
-		fmt.Println("-------------")
+		fmt.Printf("|")
+		fmt.Println("\n -------")
 	}
 }
 
@@ -65,7 +68,7 @@ func isBoardFull(board Board) bool {
 func playerMove(board Board) (int, int) {
 	var row, col int
 	for {
-		fmt.Print("Enter your move by row and column with a space seperated (for ex: '1 3')")
+		fmt.Print("Enter your move by row and column with a space seperated (for ex: '1 3'):\n")
 		_, err := fmt.Scan(&row, &col)
 		if err == nil && row >= 0 && row < 3 && col >= 0 && col < 3 && board[row][col] == empty {
 			return row, col
