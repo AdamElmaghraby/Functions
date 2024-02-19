@@ -1,0 +1,7 @@
+{
+    "User":"adam",
+    "Password":"ftppw",
+    "Server":"127.0.0.1",
+    "Port": 21,
+    "Protocol":"FTP"
+}
