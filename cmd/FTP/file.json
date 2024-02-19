@@ -2,6 +2,6 @@
     "User":"adam",
     "Password":"ftppw",
     "Server":"127.0.0.1",
-    "Port": 21,
+    "Port": 14148,
     "Protocol":"FTP"
 }
